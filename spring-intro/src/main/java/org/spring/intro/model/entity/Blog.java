@@ -1,4 +1,4 @@
-package org.spring.intro;
+package org.spring.intro.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,10 +18,10 @@ public class Blog {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, columnDefinition = "blog_content")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.DETACH}) // ?
     @JoinColumn(nullable = false, name = "user_id")
     private MUser author;
 
@@ -29,7 +29,11 @@ public class Blog {
 
     private Date updatedAt;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "blog"
+    )
     private List<BlogComment> comment;
 
     private Double rating;

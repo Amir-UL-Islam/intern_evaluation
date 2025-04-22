@@ -1,4 +1,4 @@
-package org.spring.intro;
+package org.spring.intro.model.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

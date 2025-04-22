@@ -1,15 +1,18 @@
-package org.spring.intro;
+package org.spring.intro.controller;
 
+import lombok.RequiredArgsConstructor;
+import org.spring.intro.model.dto.MUserDTO;
+import org.spring.intro.model.mapper.MUserMapper;
+import org.spring.intro.service.MUserService;
+import org.spring.intro.model.entity.MUser;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 public class MUserController {
     private final MUserService userService;
-
-    public MUserController(MUserService userService) {
-        this.userService = userService;
-    }
+    private final MUserMapper userMapper;
 
 
     @PostMapping("/api/v1/user")
@@ -19,7 +22,10 @@ public class MUserController {
 
     @GetMapping("/api/v1/user/{id}")
     public ResponseEntity<MUserDTO> getUserById(@PathVariable("id") Long id) {
-        return userService.findById(id);
+        MUser user = userService.findById(id);
+        if (user != null) {
+            return ResponseEntity.ok(userMapper.map(user));
+        } else return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/")

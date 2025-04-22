@@ -1,6 +1,9 @@
-package org.spring.intro;
+package org.spring.intro.service;
 
-import org.springframework.http.ResponseEntity;
+import org.spring.intro.model.dto.MUserDTO;
+import org.spring.intro.model.entity.MUser;
+import org.spring.intro.model.mapper.MUserMapper;
+import org.spring.intro.repository.MUserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -26,12 +29,13 @@ public class MUserService {
         userRepository.save(entity);
     }
 
-    public ResponseEntity<MUserDTO> findById(Long id) {
+
+    public MUser findById(Long id) {
         Optional<MUser> user = userRepository.findById(id);
         if (user.isPresent()) {
-            return ResponseEntity.ok(userMapper.map(user.get()));
+            return user.get();
         } else {
-            return ResponseEntity.notFound().build();
+            return null;
         }
     }
 }

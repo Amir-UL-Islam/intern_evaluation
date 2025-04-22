@@ -1,5 +1,7 @@
-package org.spring.intro;
+package org.spring.intro.model.mapper;
 
+import org.spring.intro.model.dto.MUserDTO;
+import org.spring.intro.model.entity.MUser;
 import org.springframework.stereotype.Component;
 
 @Component
