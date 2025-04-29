@@ -17,7 +17,8 @@ public class MUserController {
 
     @PostMapping("/api/v1/user")
     public void saveUser(@RequestBody MUserDTO dto) {
-        userService.save(dto);
+        MUser entity = userMapper.map(dto);
+        userService.save(entity);
     }
 
     @GetMapping("/api/v1/user/{id}")
@@ -28,8 +29,8 @@ public class MUserController {
         } else return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/")
-    private ResponseEntity<String> helloworld() {
+    @GetMapping("/api/login")
+    private ResponseEntity<String> login() {
         System.out.println("Hello World");
         return ResponseEntity.ok("Hello World");
     }

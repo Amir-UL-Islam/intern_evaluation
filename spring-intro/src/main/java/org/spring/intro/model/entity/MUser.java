@@ -15,9 +15,13 @@ public class MUser {
     private Long id;
     private String name;
     private String phoneNumber;
+    private String password;
+    private String username;
     private String email;
     private String mGroup;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<UserRole> roles = new HashSet<>();
+
+    
 }

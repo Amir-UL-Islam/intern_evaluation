@@ -15,6 +15,8 @@ public class MUserMapper {
         user.setName(dto.getName());
 
         //
+        user.setPassword(dto.getUsername());
+        user.setUsername(dto.getUsername());
         user.setPhoneNumber(dto.getPhoneNumber());
         return user;
     }
@@ -23,6 +25,7 @@ public class MUserMapper {
         MUserDTO dto = new MUserDTO();
         dto.setEmail(entity.getEmail());
         dto.setName(entity.getName());
+        dto.setUsername(entity.getUsername());
         dto.setPhoneNumber(entity.getPhoneNumber());
         return dto;
     }
